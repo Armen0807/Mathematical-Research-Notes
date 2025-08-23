@@ -62,5 +62,5 @@ The simulation results presented in the paper are fully reproducible using the p
 ### 2. Installation
 First, clone the repository:
 ```bash
-git clone [https://github.com/your-username/your-repo-name.git](https://github.com/your-username/your-repo-name.git)
-cd your-repo-name
+git clone https://github.com/Armen0807/Mathematical-Research-Notes.git
+cd Mathematical-Research-Notes
