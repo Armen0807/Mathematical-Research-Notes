@@ -1,33 +1,47 @@
-Mathematical Research & Publications
+# Mathematical Research & Publications
 
 This repository contains my personal research notes and exploratory work in mathematics, with a strong focus on probability theory, stochastic processes, quantitative finance, and functional analysis.
 
-The aim is to provide rigorous LaTeX documents (definitions, theorems, proofs, corollaries) that develop and formalize mathematical concepts, while also exploring connections to real-world applications in finance and data-driven modeling.
+The aim is to provide rigorous LaTeX documents that develop and formalize mathematical concepts, while also exploring connections to real-world applications.
 
-Contents
+---
 
-📄 Research Papers & Notes: Formal documents in LaTeX covering advanced topics (probability, stochastic calculus, convergence, etc.).
+##  About This Repository
 
-🔎 Exploratory Work: Preliminary ideas, drafts, and open questions.
+This space is organized into three main categories:
 
-🧮 Quantitative Applications: Links between pure mathematical theory and its use in modern quantitative finance and stochastic modeling.
+* **Research Papers & Notes:** Formal documents in LaTeX covering advanced topics (probability, stochastic calculus, convergence, etc.).
+* **Exploratory Work:** Preliminary ideas, drafts, and open questions that form the basis for future research.
+* **Quantitative Applications:** Notebooks and notes bridging pure mathematical theory and its use in modern quantitative finance and stochastic modeling.
 
-Current Highlight
+---
 
-Convergence at Infinity: A unified framework that formalizes the notion of convergence through exhaustion functions, introduces weighted norms, and provides a quantitative classification of convergence rates.
+## 🌟 Current Highlight: A Unified Framework for Convergence
 
-Roadmap
+The main document currently under development is **"A Unified Framework for Convergence at Infinity"**.
 
-✔ Add further research documents (stochastic integration, martingales, measure-theoretic foundations).
-✔ Extend applied notes bridging mathematical finance and probability.
-✔ Open exploration notebooks for future collaboration.
+This work formalizes the notion of convergence in general spaces through the concept of **exhaustion functions**. It introduces a family of **weighted norms** (`||f||_{∞,h,p}`) and an **asymptotic rate constant** (`C_p(f)`) to provide a robust, quantitative classification of convergence rates.
 
-Usage
 
-All documents are written in LaTeX. To compile:
 
+---
+
+##  Roadmap
+
+My current research goals for this repository include:
+
+- [ ] **Stochastic Integration:** Develop formal notes on the construction of the Itō integral.
+- [ ] **Martingale Theory:** Add a document covering the fundamental martingale convergence theorems.
+- [ ] **Applied Probability:** Extend the notes connecting probability theory and mathematical finance.
+- [ ] **Collaboration:** Open exploration notebooks (`.ipynb` or `.md`) to foster collaboration on open problems.
+
+---
+
+##  Getting Started
+
+All formal documents are written in LaTeX. To compile any of the `.tex` files into a PDF, you will need a LaTeX distribution (like TeX Live, MiKTeX).
+
+From your terminal, navigate to the document's directory and run:
+
+```bash
 pdflatex filename.tex
-
-License
-
-This repository is shared for academic and educational purposes. Feel free to read, learn, and get inspired.

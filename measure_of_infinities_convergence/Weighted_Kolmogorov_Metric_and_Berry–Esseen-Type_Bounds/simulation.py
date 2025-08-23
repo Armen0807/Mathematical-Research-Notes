@@ -1,8 +1,3 @@
-# weighted_kolmogorov_sim.py
-# Generate weighted vs uniform Kolmogorov errors for Student(ν) and Pareto(α)
-# Outputs: CSV + PNGs in ./out
-# No seaborn. Pure matplotlib. Single-plot figures. No explicit colors.
-
 import argparse
 import os
 from math import sqrt
@@ -19,7 +14,6 @@ def Phi(x):
     return 0.5 * (1.0 + _erf_vec(x / np.sqrt(2.0)))
 
 
-# ---------- Weighted & uniform Kolmogorov errors from ECDF ----------
 def weighted_and_uniform_errors(Z_samples: np.ndarray, q: float, t_grid: np.ndarray):
     """
     Z_samples: shape (B,), i.i.d. draws of Z_n (normalized sum) for fixed n
@@ -33,16 +27,13 @@ def weighted_and_uniform_errors(Z_samples: np.ndarray, q: float, t_grid: np.ndar
     diff = np.abs(F_emp - Phi(t_grid))
     return np.max(w * diff), np.max(diff)
 
-# ---------- Student-t model ----------
 def simulate_student(nu: float, n_values, B: int, q: float,
                      tmin=-8.0, tmax=8.0, grid_points=4001, seed=123):
     rng = np.random.default_rng(seed)
-    # variance exists for nu>2
     sigma = sqrt(nu / (nu - 2.0))
     t_grid = np.linspace(tmin, tmax, grid_points)
     w_errs, u_errs = [], []
     for n in n_values:
-        # Simulate B sums of size n
         X = rng.standard_t(df=nu, size=(B, n))  # mean 0
         S = X.sum(axis=1)
         Z = S / (sigma * np.sqrt(n))
@@ -51,21 +42,18 @@ def simulate_student(nu: float, n_values, B: int, q: float,
         u_errs.append(ue)
     return np.array(w_errs), np.array(u_errs)
 
-# ---------- Pareto model (Type I, xm=1) centered ----------
 def simulate_pareto(alpha: float, n_values, B: int, q: float,
                     tmin=-8.0, tmax=8.0, grid_points=4001, seed=456):
     rng = np.random.default_rng(seed)
-    # Type I Pareto with xm=1 has mean mu=alpha/(alpha-1) (alpha>1)
-    # variance = alpha/((alpha-1)^2 (alpha-2)) for alpha>2
+
     mu = alpha / (alpha - 1.0)
     var = alpha / ((alpha - 1.0) ** 2 * (alpha - 2.0))
     sigma = sqrt(var)
     t_grid = np.linspace(tmin, tmax, grid_points)
     w_errs, u_errs = [], []
     for n in n_values:
-        # numpy pareto(alpha) has support y>=0 with pdf a*(1+y)^(-a-1); X=Y+1 is Type I with xm=1
         Y = rng.pareto(alpha, size=(B, n)) + 1.0
-        X = Y - mu  # center to mean 0
+        X = Y - mu
         S = X.sum(axis=1)
         Z = S / (sigma * np.sqrt(n))
         we, ue = weighted_and_uniform_errors(Z, q=q, t_grid=t_grid)
@@ -73,7 +61,6 @@ def simulate_pareto(alpha: float, n_values, B: int, q: float,
         u_errs.append(ue)
     return np.array(w_errs), np.array(u_errs)
 
-# ---------- Plot helpers ----------
 def ensure_outdir(path="out"):
     os.makedirs(path, exist_ok=True)
     return path
@@ -82,7 +69,6 @@ def plot_loglog(x, y, title, xlabel, ylabel, outfile, ref_slope=None):
     plt.figure(figsize=(7, 5))
     plt.loglog(x, y, marker="o")
     if ref_slope is not None:
-        # draw a reference line of slope `ref_slope` through the last point for visual guidance
         x0, y0 = x[-1], y[-1]
         y_ref = y0 * (x / x0) ** ref_slope
         plt.loglog(x, y_ref, linestyle="--", label=f"reference slope {ref_slope:g}")
@@ -110,7 +96,6 @@ def plot_compare(x, y1, y2, title, xlabel, ylabel, labels, outfile, ref_slope=No
     plt.savefig(outfile, dpi=160, bbox_inches="tight")
     plt.close()
 
-# ---------- Main ----------
 def main():
     parser = argparse.ArgumentParser(description="Weighted vs uniform Kolmogorov error for heavy-tailed sums")
     parser.add_argument("--nu", type=float, default=2.5, help="Student t degrees of freedom (nu>2)")
@@ -128,7 +113,6 @@ def main():
     n_values = np.array([2 ** k for k in range(args.n_min_exp, args.n_max_exp + 1)], dtype=int)
     outdir = ensure_outdir(args.outdir)
 
-    # Simulations
     w_stu, u_stu = simulate_student(
         nu=args.nu, n_values=n_values, B=args.B, q=args.q,
         tmin=args.grid_min, tmax=args.grid_max, grid_points=args.grid_points, seed=123
@@ -138,7 +122,6 @@ def main():
         tmin=args.grid_min, tmax=args.grid_max, grid_points=args.grid_points, seed=456
     )
 
-    # Save CSV
     df = pd.DataFrame({
         "n": n_values,
         "weighted_student": w_stu,
@@ -150,7 +133,6 @@ def main():
     df.to_csv(csv_path, index=False)
     print(f"[saved] {csv_path}")
 
-    # Figures
     fig1 = os.path.join(outdir, "weighted_student.png")
     plot_loglog(
         n_values, w_stu,
