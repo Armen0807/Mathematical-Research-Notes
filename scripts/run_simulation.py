@@ -80,7 +80,7 @@ def main():
     parser.add_argument("--alpha", type=float, default=2.8)
     parser.add_argument("--q", type=float, default=1.2)
     parser.add_argument("--B", type=int, default=160, help="Batches per n")
-    parser.add_argument("--outdir", type=str, default="experiments/outputs")
+    parser.add_argument("--outdir", type=str, default="experiments/results")
 
     args = parser.parse_args()
 
