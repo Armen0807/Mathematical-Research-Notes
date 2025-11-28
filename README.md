@@ -18,7 +18,7 @@ Standard uniform metrics (like the classic Kolmogorov distance) often fail to ca
 
 ---
 
-## Research Papers
+##  Research Papers
 
 The theoretical foundations and proofs are detailed in the following papers included in the `papers/` directory:
 
@@ -61,7 +61,7 @@ python simulation.py --outdir experiments/outputs
 
 Outputs: Results are saved in experiments/outputs/. The simulations compare Uniform vs. Weighted error decay for Student-t and Pareto distributions, confirming the theoretical slope of −1/2 for the weighted metric.
 
-## Citation
+##  Citation
 
 If you use this framework or code in your research, please cite:
 @article{petrosyan2025exhaustion,
@@ -72,7 +72,7 @@ If you use this framework or code in your research, please cite:
   journal={SSRN Preprint}
 }
 
-## Author
+##  Author
 Armen Petrosyan
 
 Research Interests: Quantitative Finance, Stochastic Analysis, Heavy-Tailed Risk, Martingale Theory.
