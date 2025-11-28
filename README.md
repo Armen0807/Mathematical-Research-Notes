@@ -5,7 +5,7 @@
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)]()
 [![Research Status](https://img.shields.io/badge/Research-Active-red)]()
 
-## 🚀 Overview
+##  Overview
 
 This repository hosts the reference implementation and research papers for the **Exhaustion Framework**, a novel mathematical approach to quantifying asymptotic convergence in heavy-tailed environments.
 
@@ -18,7 +18,7 @@ Standard uniform metrics (like the classic Kolmogorov distance) often fail to ca
 
 ---
 
-## 📄 Research Papers
+## Research Papers
 
 The theoretical foundations and proofs are detailed in the following papers included in the `papers/` directory:
 
@@ -32,7 +32,7 @@ The theoretical foundations and proofs are detailed in the following papers incl
 
 ---
 
-## 🛠 Installation & Usage
+##  Installation & Usage
 
 ### Requirements
 """```bash
@@ -54,14 +54,14 @@ weighted_err, uniform_err = weighted_kolmogorov_error(data, q=1.2, t_grid=t_grid
 print(f"Weighted Error: {weighted_err:.5f} (Captures central behavior)")
 print(f"Uniform Error:  {uniform_err:.5f} (Dominated by tail noise)")
 
-## 📊 Reproducibility & Experiments
+##  Reproducibility & Experiments
 To reproduce the convergence graphs (Figures 1 & 2 in the paper), run the simulation script provided. This validates the theoretical bounds derived in Petrosyan (2025).
 
 python simulation.py --outdir experiments/outputs
 
 Outputs: Results are saved in experiments/outputs/. The simulations compare Uniform vs. Weighted error decay for Student-t and Pareto distributions, confirming the theoretical slope of −1/2 for the weighted metric.
 
-## 📚 Citation
+## Citation
 
 If you use this framework or code in your research, please cite:
 @article{petrosyan2025exhaustion,
@@ -72,7 +72,7 @@ If you use this framework or code in your research, please cite:
   journal={SSRN Preprint}
 }
 
-## 👤 Author
+## Author
 Armen Petrosyan
 
 Research Interests: Quantitative Finance, Stochastic Analysis, Heavy-Tailed Risk, Martingale Theory.
